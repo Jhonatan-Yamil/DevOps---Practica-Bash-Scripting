@@ -3,6 +3,16 @@
 # - Jhonatan Cabezas
 # - Valeria Martinez
 
+# .Env
+ENV_PATH="/home/jhonatan/devops/practicaI/DevOps---Practica-Bash-Scripting/.env"
+
+if [ -f "$ENV_PATH" ]; then
+    export $(grep -v '^#' "$ENV_PATH" | xargs)
+else
+    echo " No se encontró archivo .env en $ENV_PATH"
+    exit 1
+fi
+
 # Valida parametro 
 if [ -z "$1" ]; then
     echo " Error: Debes especificar el nombre del servicio."
@@ -12,7 +22,7 @@ fi
 
 SERVICE="$1"
 LOG_FILE="service_status.log" 
-EMAIL="jhonatanyamilcabezas@gmail.com"    
+EMAIL="$ALERT_EMAIL"    
 DATE=$(date '+%Y-%m-%d %H:%M:%S')
 HOST=$(hostname)
 

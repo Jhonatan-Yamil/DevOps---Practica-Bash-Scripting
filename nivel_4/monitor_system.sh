@@ -9,7 +9,8 @@ else
     exit 1
 fi
 
-CPU_LIMIT=80
+#CPU 50 para forzar alerta
+CPU_LIMIT=50
 RAM_LIMIT=80
 DISK_LIMIT=80
 

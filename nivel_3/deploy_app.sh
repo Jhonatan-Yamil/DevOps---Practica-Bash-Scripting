@@ -1,9 +1,18 @@
 #!/bin/bash
+#.Env
+ENV_PATH="/home/jhonatan/devops/practicaI/DevOps---Practica-Bash-Scripting/.env"
+
+if [ -f "$ENV_PATH" ]; then
+    export $(grep -v '^#' "$ENV_PATH" | xargs)
+else
+    echo " No se encontró archivo .env en $ENV_PATH"
+    exit 1
+fi
 REPO_URL="https://github.com/rayner-villalba-coderoad-com/clash-of-clan"
 DEPLOY_DIR="./clash-of-clan"
 LOG_FILE="./deploy.log"
 SERVICE="apache2"
-WEBHOOK_URL="https://discord.com/api/webhooks/1437890464282841169/mpTyFMnVBq_A0nfzrD3Aels3STIf8o_bMeFQPRRFBu7z9ZkhpBDBqCd1uFt512flpkl0"
+WEBHOOK_URL="$DISCORD_WEBHOOK"
 DATE=$(date '+%Y-%m-%d %H:%M:%S')
 
 echo "[$DATE] === Iniciando despliegue ===" | tee -a "$LOG_FILE"
